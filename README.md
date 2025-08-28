@@ -1,30 +1,129 @@
-# 🎓 Student CMS (Attendance & Profile Management System)
+# 🎓 Student CMS – Attendance Management System  
 
-A **full-stack web application** for managing **student profiles and attendance insights**.  
-Built with **React + Vite + Tailwind (Frontend)** and **FastAPI + Uvicorn (Backend)**.  
-Deployed on **Vercel (Frontend)** and **Render (Backend)**.  
+A **full-stack student attendance tracker** built with **React + FastAPI**.  
+It reads attendance data from **CSV files** and provides **insights + visual trends**.  
+
+👉 Live Demo:  
+- **Frontend (Vercel)** → [Student CMS Frontend](https://student-cms-neon.vercel.app)  
+- **Backend (Render)** → [Student CMS Backend](https://student-cms-imgl.onrender.com)  
 
 ---
 
 ## ✨ Features
-
-✅ Student Profile Management  
-✅ Attendance Insights & Trends (CSV-driven data)  
-✅ Interactive Charts & Analytics  
-✅ Health Check API for backend status  
-✅ Deployed & accessible via web  
+✅ Student profile view (ID, Name, Course, Date of Joining)  
+✅ Attendance insights (% attended, last class date, status)  
+✅ Attendance trend visualization with charts 📊  
+✅ Fast backend API with **FastAPI + Python**  
+✅ Modern UI using **React + Tailwind + ShadCN**  
+✅ Deployed with **Vercel (frontend)** + **Render (backend)**  
 
 ---
 
-## 🖼️ Project Preview
+## 🖼️ Preview  
 
-### 🔹 Landing Page (Frontend - React)
-![Landing Page](https://github.com/yourusername/Student-cms/assets/yourimageid/landing.png)
+![UI Preview](./assets/demo-ui.png)  
+*Attendance dashboard with charts*  
 
-### 🔹 Attendance Dashboard
-![Attendance Dashboard](https://github.com/yourusername/Student-cms/assets/yourimageid/dashboard.png)
+🎥 Demo GIF: *(Add recording here)*  
+![Demo GIF](./assets/demo.gif)  
 
-### 🔹 API Response Example
+---
+
+## 🛠️ Tech Stack  
+
+### Frontend  
+- ⚡ [Vite](https://vitejs.dev/) for blazing fast builds  
+- ⚛️ React + TypeScript  
+- 🎨 TailwindCSS for modern styling  
+- 🖼️ ShadCN UI components  
+- 📊 Charts for attendance visualization  
+
+### Backend  
+- 🚀 [FastAPI](https://fastapi.tiangolo.com/) for REST APIs  
+- 🐍 Python + Uvicorn  
+- 🗂️ CSV-based data storage  
+- 🌐 Hosted on Render  
+
+---
+
+## 📂 Project Structure
+```bash
+Student-CMS/
+│── backend/
+│   ├── app/
+│   │   ├── main.py        # FastAPI entry point
+│   │   ├── routers/       # Attendance, healthcheck routes
+│   │   ├── utils/         # CSV parsing logic
+│   └── requirements.txt   # Backend dependencies
+│
+│── frontend/
+│   ├── src/
+│   │   ├── api/           # API integration
+│   │   ├── components/    # UI Components
+│   │   ├── pages/         # Views
+│   └── vite.config.ts
+│
+└── README.md
+````
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone Repo
+
+```bash
+git clone https://github.com/yourusername/Student-cms.git
+cd Student-cms
+```
+
+### 2️⃣ Setup Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Backend runs on 👉 [http://localhost:8000](http://localhost:8000)
+
+### 3️⃣ Setup Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on 👉 [http://localhost:5173](http://localhost:5173)
+
+---
+
+## ⚙️ Environment Variables
+
+### Backend (Render)
+
+```bash
+PORT=8000
+```
+
+### Frontend (Vercel)
+
+```bash
+VITE_API_BASE=https://student-cms-imgl.onrender.com
+```
+
+---
+
+## 🔧 API Endpoints
+
+| Method | Endpoint                   | Description               |
+| ------ | -------------------------- | ------------------------- |
+| GET    | `/health`                  | Check backend health      |
+| GET    | `/attendance/{student_id}` | Fetch attendance insights |
+
+### Example Response
+
 ```json
 {
   "profile": {
@@ -45,134 +144,63 @@ Deployed on **Vercel (Frontend)** and **Render (Backend)**.
     { "date": "2023-03-02", "attended": 0 }
   ]
 }
-🛠️ Tech Stack
-Frontend (React + Vite + TypeScript + Tailwind + ShadCN UI)
+```
 
-⚡ Vite for blazing fast builds
+---
 
-🎨 TailwindCSS for modern styling
+## 🌍 Deployment Links
 
-📊 Charts for attendance trends
+* **Frontend (Vercel)** → [Student CMS Frontend](https://student-cms-neon.vercel.app)
+* **Backend (Render)** → [Student CMS Backend](https://student-cms-imgl.onrender.com)
 
-Backend (FastAPI + Python + Uvicorn)
+---
 
-🚀 FastAPI for REST APIs
+## 📜 Architecture Flow
 
-🗂️ Reads data from CSV files
+```mermaid
+graph TD;
+    User -->|Browser| Frontend[Vercel - React/Vite]
+    Frontend -->|API Calls| Backend[Render - FastAPI]
+    Backend -->|Reads CSV| Data[(CSV Files)]
+```
 
-🌐 Deployed on Render
+---
 
-Deployment
+## 👨‍💻 Author
 
-Frontend → Vercel
+**Pramodkumar Athkuri**
 
-Backend → Render
+* GitHub: [@AB-bunny178](https://github.com/AB-bunny178)
+* LinkedIn: [Pramodkumar Athkuri](https://www.linkedin.com/in/pramodkumar-athkuri-4466382ab/)
 
-📂 Project Structure
-bash
-Copy code
-Student-CMS/
-│── backend/
-│   ├── app/
-│   │   ├── main.py        # FastAPI entry point
-│   │   ├── routers/       # Attendance, healthcheck routes
-│   │   ├── utils/         # CSV parsing logic
-│   └── requirements.txt   # Backend dependencies
-│
-│── frontend/
-│   ├── src/
-│   │   ├── api/           # API integration
-│   │   ├── components/    # UI Components
-│   │   ├── pages/         # Views
-│   └── vite.config.ts
-│
-└── README.md
-🚀 Getting Started
-1️⃣ Clone Repo
-bash
-Copy code
-git clone https://github.com/yourusername/Student-cms.git
-cd Student-cms
-2️⃣ Setup Backend
-bash
-Copy code
-cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-Backend runs on http://localhost:8000
+---
 
-3️⃣ Setup Frontend
-bash
-Copy code
-cd frontend
-npm install
-npm run dev
-Frontend runs on http://localhost:5173
+## ⭐ Contributing
 
-⚙️ Environment Variables
-Backend (Render)
-bash
-Copy code
-PORT=8000
-Frontend (Vercel)
-bash
-Copy code
-VITE_API_BASE=https://student-cms-imgl.onrender.com
-🌍 Deployment Links
-Frontend (Vercel) → Student CMS Frontend
-
-Backend (Render) → Student CMS Backend
-
-🔧 API Endpoints
-Method	Endpoint	Description
-GET	/health	Check backend health
-GET	/attendance/{student_id}	Fetch attendance insights
-
-🎥 Demo (GIF/Animation)
-
-
-👨‍💻 Author
-👤 Pramodkumar Athkuri
-
-GitHub: @AB-bunny178
-
-LinkedIn: https://www.linkedin.com/in/pramodkumar-athkuri-4466382ab/
-
-⭐ Contributing
 Contributions are welcome!
 
-Fork the repo
-
-Create a feature branch
-
-Submit a PR 🚀
-
-📜 License
-MIT License © 2025 [Your Name]
-
-yaml
-Copy code
+1. Fork the repo
+2. Create a feature branch
+3. Submit a Pull Request 🚀
 
 ---
 
-👉 This README includes:
-- **Project intro**  
-- **Features list**  
-- **Images/GIF placeholders**  
-- **Tech stack**  
-- **Setup instructions**  
-- **Env variables (Render + Vercel)**  
-- **API docs**  
-- **Deployment links**  
+## 📜 License
+
+MIT License © 2025 \[Pramodkumar Athkuri]
 
 ---
 
-Do you want me to also **create an ASCII animation/diagram** (like architecture flow) inside README so it looks even cooler?
+```
 
+---
 
+⚡ This README has:  
+- Images & GIF placeholders  
+- Architecture flow (with Mermaid diagram)  
+- Setup + Deployment + Env vars  
+- API docs + Example JSON  
+- Author & Contribution info  
 
-
-
-
-
-Ask ChatGPT
+Do you also want me to **add badges** (like Vercel deploy, Render health, Tech badges) at the top for a professional touch?
+```
