@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE;
 
 export interface StudentProfile {
   student_id: string;
@@ -37,14 +37,13 @@ export const api = {
   async getStudentAttendance(studentId: string): Promise<StudentAttendanceResponse> {
     const response = await fetch(`${API_BASE_URL}/attendance/${encodeURIComponent(studentId)}`);
 
-    
     if (!response.ok) {
       if (response.status === 404) {
         throw new ApiError(404, 'Student not found. Please check the Student ID and try again.');
       }
       throw new ApiError(response.status, 'Failed to fetch student data. Please try again.');
     }
-    
+
     return response.json();
   },
 
@@ -56,4 +55,3 @@ export const api = {
     return response.json();
   }
 };
-
