@@ -1,59 +1,48 @@
-import pandas as pd
-import re
+# import pandas as pd
 
-# Load files
-attendance_file = "data/Hindustani Vocal & Tabla v7.csv"
-master_file = "data/KaushikDhwanee_Master_Student_IDs.csv"
+# # Load CSV here
+# df = pd.read_csv("data/final.csv")
 
-att_df = pd.read_csv(attendance_file)
-ids_df = pd.read_csv(master_file)
+# def get_student_row(student_id: str):
+#     """Fetch a student's row from CSV by ID"""
+#     student = df[df["Student ID"] == student_id]
+#     return None if student.empty else student.iloc[0]
 
-# Clean attendance dataframe
-att_df = att_df.loc[:, ~att_df.columns.str.contains("^Unnamed")]
+# def build_profile(row):
+#     """Build student profile dictionary"""
+#     return {
+#         "student_id": row["Student ID"],
+#         "name": row["Student Name"],
+#         "course": row["Course Category"],
+#         "date_of_joining": row["Date of Joining"]
+#     }
 
-# Identify attendance date columns
-date_columns = [col for col in att_df.columns if "-" in col and col not in ["Start Date", "End Date"]]
+# def build_insights(row):
+#     """Build attendance insights dictionary"""
+#     total_allotted = int(row["Total classes Allotted"])
+#     total_attended = int(row["Classes Attended to-date"])
+#     percentage = float(row["Attendance %"])
+#     last_attended = row["Last Attended Date"]
 
-# Extract total classes allotted from "Package Name"
-def extract_total_classes(package_name):
-    if pd.isna(package_name):
-        return None
-    match = re.search(r"\((\d+)\s*classes?\)", str(package_name), flags=re.IGNORECASE)
-    if match:
-        return int(match.group(1))
-    match = re.search(r"(\d+)\s*sessions?", str(package_name), flags=re.IGNORECASE)
-    if match:
-        return int(match.group(1))
-    return None
+#     if percentage >= 75:
+#         status = "Good"
+#     elif percentage >= 50:
+#         status = "Average"
+#     else:
+#         status = "At Risk"
 
-att_df["Total Classes Allotted"] = att_df["Package Name"].apply(extract_total_classes)
+#     return {
+#         "total_classes_allotted": total_allotted,
+#         "total_classes_attended": total_attended,
+#         "attendance_percentage": percentage,
+#         "last_attended_date": last_attended,
+#         "status": status
+#     }
 
-# Find the last attended date
-def get_last_attended(row):
-    attended_dates = [col for col in date_columns if pd.notna(row[col]) and row[col] == 1]
-    return attended_dates[-1] if attended_dates else None
-
-att_df["Last Attended Date"] = att_df.apply(get_last_attended, axis=1)
-
-# Merge with master file
-merged = att_df.merge(ids_df[["Student ID", "Date of Joining"]], on="Student ID", how="left")
-
-# Compute Attendance %
-merged["Attendance %"] = (
-    merged["Classes Attended to-date"] / merged["Total Classes Allotted"] * 100
-).round(2)
-
-# Final useful columns
-final_df = merged[[
-    "Student ID",
-    "Student Name", 
-    "Course Category", 
-    "Date of Joining",
-    "Total Classes Allotted", 
-    "Classes Attended to-date",
-    "Attendance %", 
-    "Last Attended Date"
-]]
-
-# Convert to dict for faster lookup
-student_dict = final_df.set_index("Student ID").T.to_dict()
+# def build_trend(row):
+#     """Dummy trend data (replace with real attendance if available)"""
+#     return [
+#         {"date": "2025-08-01", "attended": 1},
+#         {"date": "2025-08-02", "attended": 0},
+#         {"date": "2025-08-03", "attended": 1}
+#     ]
