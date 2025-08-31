@@ -4,7 +4,18 @@ import pandas as pd
 from pathlib import Path
 import math
 
+
 app = FastAPI()
+app = FastAPI(title="Student Attendance Dashboard API")
+
+# CORS for frontend at localhost:808
+origins = [
+    "https://student-cms-neon.vercel.app",     # if you run locally
+    "http://127.0.0.1:8080",
+    "http://10.78.5.228:8081",  # your current frontend origin
+
+]
+
 
 # Enable CORS
 app.add_middleware(
